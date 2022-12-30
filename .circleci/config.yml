@@ -23,18 +23,18 @@ jobs:
   configure_infra:
     docker:
       - image: python:3.11.1-alpine3.17
-      steps:
-        - checkout
-        - add_ssh_keys:
-            fingerprints: ["c8:fd:ca:a8:3c:99:67:c2:ef:62:24:b4:a9:84:8b:47"]
-        - run:
-            name: install deps
-            command: |
-              apk add --update ansible
-        - run:
-            name: Configure server
-            command: |
-              ansible-playbook -i inventory main.yml
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["c8:fd:ca:a8:3c:99:67:c2:ef:62:24:b4:a9:84:8b:47"]
+      - run:
+          name: install deps
+          command: |
+            apk add --update ansible
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory main.yml
 
 workflows:
   deploy_workflow:
