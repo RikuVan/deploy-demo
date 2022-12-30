@@ -4,13 +4,12 @@ version: 2.1
 
 # Use a package of configuration called an orb.
 orbs:
-  aws-cli: circleci/aws-cli@2.0.3
+  aws-cli: circleci/aws-cli@3.1.4
 
 commands:
    # Exercise - Rollback
    destroy_environment:
      steps:
-       - run: echo "export PATH='$PATH:/root/.local/bin'" >> $BASH_ENV
        - run:
            name: Destroy environment
            when: on_fail
@@ -62,5 +61,7 @@ workflows:
     jobs:
       - create_infra
       # - configure_infra
-      - smoke_test
+      - smoke_test:
+          requires:
+            - create_infra
 
